@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student-list</title>
+    <link rel="stylesheet" href="css/header.css">
+    <style>
+    #dropdown-container1{
+        display: block;
+        cursor: pointer;
+        padding-left: 10px;
+    }
+    </style>
+</head>
+<body >
+    <header >
+        <h1>Student Management System</h1>
+    </header>
+    <!-- <img src="/Images/studentlist.jpg"  alt="Student List"> -->
+    <nav class="sidenav">
+        <a href="admin.home.html" style="text-decoration: none;" >Home</a>
+        <a id="dropdown" style="background-color: tomato;color: rgb(59, 56, 55);">Student</a>
+        <div id="dropdown-container1">
+        	<a href="admin_Student_Profile.html" style="text-decoration: none; font-size: 17px;">Profile</a>
+            <a href="admin_StudentList.html" style="text-decoration: none; font-size: 17px;background-color: tomato;
+            color: rgb(59, 56, 55);">Student List</a>
+            <a href="admin_add_Student.html" style="text-decoration: none; font-size: 17px;">Add Student</a>
+            
+        </div>
+        <a id="dropdown">Staff</a>
+        <div id="dropdown-container">
+            <a href="showstaff" style="text-decoration: none; font-size: 15px;">Staff List</a>
+            <a href="admin.addstaff.html" style="text-decoration: none; font-size: 15px;">Add Staff</a>
+        </div>
+        <a href="index.html" onclick="preventReload()" style="text-decoration: none;">Logout</a>
+        <!-- <script type="text/javascript">
+            function preventBack() { window.history.forward(); }
+            setTimeout("preventBack()", 0);
+            window.onunload = function () { null };
+        </script> -->
+    </nav>
+    <section >
+        <div >
+            <h3 style="padding-top: 100px; margin-left: 45%; padding-bottom: 20px;">Student List</h3>
+            <!-- <input type="submit" value="getlist" onclick="getList()">   -->
+        </div>
+        <div>
+            <table id="sdtable" border="1" cellpadding="15" style="border-collapse: collapse; overflow-x: auto;
+            text-align: center; overflow-y: auto; margin-left: 550px;">
+               <!--  <thead>
+                    <tr>
+                        <th rowspan="2">Name</th>
+                        <th rowspan="2">Gender</th>
+                        <th rowspan="2">Department</th>
+                        <th rowspan="2">Email</th>
+                    </tr>
+                </thead>
+                <tbody id="table">
+                </tbody>    -->
+			</table>
+        </div>
+        </section>
+        <script >
+        window.onload = function getList(){
+    		var Url = "http://localhost:8080/StudentManagement/webapi/students/getstudents";
+    	 	var ajax = new XMLHttpRequest();
+    		ajax.open('GET', Url, true);
+       		ajax.setRequestHeader("Content-Type", "application/json");
+       		ajax.send();
+       		ajax.onreadystatechange = function(){
+    		   	if (ajax.readyState == 4 && ajax.status == 200) {
+    		   	// alert(xhr.responseText.headers.Host);
+    			   var response = JSON.parse(ajax.responseText);                       
+    				console.log(ajax.responseText);  
+    				
+    				var table = document.getElementById('sdtable');
+    			
+    				var tr1 = document.createElement('tr');
+    				var th3 = document.createElement("th");
+    				var text3 = document.createTextNode("ID");
+    				th3.appendChild(text3);
+    				tr1.appendChild(th3);
+    				
+    				var th = document.createElement("th");
+    				var text = document.createTextNode("Name");
+    				th.appendChild(text);
+    				tr1.appendChild(th);
+    				
+    				var th1 = document.createElement("th");
+    				var text1 = document.createTextNode("Department");
+    				th1.appendChild(text1);
+    				tr1.appendChild(th1);
+    				
+    				var th2 = document.createElement("th");
+    				var text2 = document.createTextNode("Email-ID");
+    				th2.appendChild(text2);
+    				tr1.appendChild(th2);
+    				table.appendChild(tr1);
+    				
+    				for(var i=0; i<response.length; i++){
+    					var tr = document.createElement("tr");
+    					var td= document.createElement("td");
+    					var text = document.createTextNode(response[i].id);
+    					td.appendChild(text);
+    					tr.appendChild(td);
+    					
+    					var td1= document.createElement("td");
+    					var text1 = document.createTextNode(response[i].name);
+    					td1.appendChild(text1);
+    					tr.appendChild(td1);
+    					
+    					var td2= document.createElement("td");
+    					var text2 = document.createTextNode(response[i].department);
+    					td2.appendChild(text2);
+    					tr.appendChild(td2);	
+    					
+    					var td3= document.createElement("td");
+    					var text3 = document.createTextNode(response[i].emailid);
+    					td3.appendChild(text3);
+    					tr.appendChild(td3);
+    					table.appendChild(tr);
+    				}
+    			}
+    		}
+    }
+        </script>
+    </body>
+</html>

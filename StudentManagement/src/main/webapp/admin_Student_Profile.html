@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student-profile</title>
+    <link rel="stylesheet" href="css/header.css">
+    <style>
+        #dropdown-container1{
+            display: block;
+            cursor: pointer;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Student Management System</h1>
+    </header>
+    <!-- <img src="/Images/addstudent.png" alt=""> -->
+    <nav class="sidenav">
+        <a href="admin.home.html" style="text-decoration: none;" >Home</a>
+        <a id="dropdown" style="background-color: tomato;color: rgb(59, 56, 55);">Student</a>
+        <div id="dropdown-container1">
+        	<a href="admin_Student_Profile.html" style="text-decoration: none; font-size: 17px;background-color: tomato;
+            color: rgb(59, 56, 55);">Profile</a>
+            <a href="admin_StudentList.html" style="text-decoration: none; font-size: 17px;">Student List</a>
+            <a href="admin_add_Student.html" style="text-decoration: none; font-size: 17px;">Add Student</a>
+        </div>
+        <a id="dropdown">Staff</a>
+        <div id="dropdown-container">
+            <a href="showstaff" style="text-decoration: none; font-size: 15px;">Staff List</a>
+            <a href="admin.addstaff.html" style="text-decoration: none; font-size: 15px;">Add Staff</a>
+        </div>
+        <a href="index.html" onclick="preventReload()" style="text-decoration: none;">Logout</a>
+        <!-- <script type="text/javascript">
+            function preventBack() { window.history.forward(); }
+            setTimeout("preventBack()", 0);
+            window.onunload = function () { null };
+        </script> -->
+    </nav>
+    <section >
+        <div>
+            <h3 style="padding-top: 100px; margin-left: 45%;">Student Profile</h3>
+        </div>
+        <input type="text" id ="search" name="search" placeholder="EnterID" style="margin-left: 200px;">
+        <input type="button" value="Search by ID" onclick="getById()"><br><br>
+        <table border="1" cellpadding="15" style="border-collapse: collapse; overflow-x: auto;
+            text-align: center; overflow-y: auto; margin-left: 200px;">
+        	<tr>
+        		<th>Name:</th>
+        		<td id="sdname"></td>
+        	</tr>
+        	<tr>
+        		<th>Gender:</th>
+        		<td id="sdgender"></td>
+        	</tr>
+        	<tr>
+        		<th>Department:</th>
+        		<td id="sddept"></td>
+        	</tr>
+        	<tr>
+        		<th>Email-ID:</th>
+        		<td id="sdemailid"></td>
+        	</tr>
+        	<tr>
+        		<th>Father's Name:</th>
+        		<td id="sdfname"></td>
+        	</tr>
+        	<tr>
+        		<th>Father's Mobile:</th>
+        		<td id="sdfmobile"></td>
+        	</tr>
+        	<tr>
+        		<th>Mother's Name:</th>
+        		<td id="sdmname"></td>
+        	</tr>
+        	<tr>
+        		<th>Mothers'Mobile:</th>
+        		<td id="sdmmobile"></td>
+        	</tr>
+        	<tr>
+        		<th>Address:</th>
+        		<td id="sdaddress"></td>
+        	</tr>
+        </table>
+        <script type="text/javascript" src="Search.js"></script>
+    </section>
+</body>
+</html>
