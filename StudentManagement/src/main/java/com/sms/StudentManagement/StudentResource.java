@@ -1,63 +1,88 @@
 package com.sms.StudentManagement;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.GET;
+//import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("students")
+@Path("getstudents")
 public class StudentResource 
 {
-		
-	StudentList list = new StudentList();
-//	static ArrayList<Student> st = new ArrayList<Student>();
+	
+	private StudentList list = new StudentList();
 	@GET
-	@Path("getstudents")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Path("students")
+	@Produces({MediaType.APPLICATION_JSON})
 	public List<Student> getStudents() {
-//		 System.out.println("getStudents Called");
+//		System.out.println("students");
+//		return Response
+//		      .status(200)
+//		      .header("Access-Control-Allow-Origin", "http://localhost:8123")
+//		      .header("Access-Control-Allow-Credentials", "true")
+//		      .header("Access-Control-Allow-Headers",
+//		        "origin, content-type, accept, authorization")
+//		      .header("Access-Control-Allow-Methods", 
+//		        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+//		      .entity(list.getStudents())
+//		      .build();
 		return list.getStudents();
 	}
 	
 	@GET
-	@Path("student/{id}")
+	@Path("students/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudent(@PathParam("id") int id) {
-//		System.out.println(id);
-//		for(Student student : st) {
-//			if(student.getId() == id)
-//				return student;
-//		}
 		return list.getStudent(id);
+//		return Response
+//		      .status(200)
+//		      .header("Access-Control-Allow-Origin", "http://localhost:8123")
+//		      .header("Access-Control-Allow-Credentials", "true")
+//		      .header("Access-Control-Allow-Headers",
+//		        "origin, content-type, accept, authorization")
+//		      .header("Access-Control-Allow-Methods", 
+//		        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+//		      .entity(list.getStudent(id))
+//		      .build();
+	}
+	
+	@PUT
+	@Path("students/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void updateStudent(Student sample, @PathParam("id") int id) {
+//		return list.getStudent(id);
+		Student s1 = list.getStudent(id);
+		list.updateStudent(sample, id);
 	}
 	
 	@POST
-	@Path("addstudent")
+	@Path("students")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Student createStudent(Student s1) {
-		//System.out.println("createStudent called");
-//		System.out.println(s1);
-//		st.add(s1);
-		int id = list.size();
-		s1.setId(id+1);
+	public void createStudent(Student s1) {
+		
+		System.out.println(list.getStudents().size());
+		
+		s1.setId(list.getStudents().size());
+		
+		System.out.println(s1);
 		list.create(s1);
-//		System.out.println(s1.getId());
-//		System.out.println(s1.getName());
-//		System.out.println(s1.getGender());
-//		System.out.println(s1.getDepartment());
-//		System.out.println(s1.getEmailid());
-//		System.out.println(s1.getFname());
-//		System.out.println(s1.getFmobile());
-//		System.out.println(s1.getMname());
-//		System.out.println(s1.getMmobile());
-//		System.out.println(s1.getAddress());
-//		list.create(s1);
-		return s1;
+//		return s1;
+//		return Response
+//		      .status(200)
+//		      .header("Access-Control-Allow-Origin", "http://localhost:8123")
+//		      .header("Accept", "application/json")
+//		      .header("Access-Control-Allow-Credentials", "true")
+//		      .header("Access-Control-Allow-Headers",
+//		        "origin, content-type, accept, authorization")
+//		      .header("Access-Control-Allow-Methods", 
+//		        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+//		      .entity(s1)
+//		      .build();
 	}
 }
